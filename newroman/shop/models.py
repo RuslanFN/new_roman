@@ -8,7 +8,7 @@ class Textile(models.Model):
         return title
 
 class Order(models.Model):
-    Textile = models.ForeignKey(Textile)
+    Textile = models.ForeignKey(Textile, on_delete=models.CASCADE)
     width = models.IntegerField() 
     height = models.IntegerField()
     def __str__(self):
