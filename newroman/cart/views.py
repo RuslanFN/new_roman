@@ -20,7 +20,8 @@ def cart_add(request):
 def get_cart(request):
     cart = Cart(request)
     print(cart.cart)
-    return render(request, "cart.html", {"cart": cart})
+    is_moderator = request.user.groups.filter(name='moderator').exists()
+    return render(request, "cart.html", {"cart": cart, 'is_moderator': is_moderator})
 def remove(request):
     cart = Cart(request)
     if str(request.GET.get('id')).isdigit():

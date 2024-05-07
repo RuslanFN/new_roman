@@ -1,7 +1,7 @@
 {% extends "shop/base.html" %}
 {% load static %}
-{% block styles %} <link href="{% static "css/style.css" %}" type="text/css" rel="stylesheet"> {% endblock styles %}
-{% block scripts %} <script src="{% static "js/script.js" %}"></script> {% endblock scripts %}
+{% block styles %} <link href="{% static 'css/style.css' %}" type="text/css" rel="stylesheet"> {% endblock styles %}
+{% block scripts %} <script src="{% static 'js/script.js' %}"></script> {% endblock scripts %}
 {% block title %}Конструктор{% endblock title %}
 {% block content %}
 <form method="post" action="add">
@@ -9,7 +9,7 @@
     <div class="container-construct">
         <div class="container"> 
             <img id="background" class="image1" src="https://shadesncurtains.com/vendor/img/ms.jpg"/>
-            <img id="blind" class="image2" src="https://shadesncurtains.com/img/clothes/85/840713912871185.png"/>
+            <img id="blind" class="image2" src=""/>
             <img id="kant" class="image21" src=""/>
         </div>
         <div class='textiles-group'>
@@ -20,7 +20,7 @@
                 {% endfor %}
                
             </div>
-            <label for"textiles">Канты</label>
+            <label for'textiles'>Канты</label>
             <div class='textiles'>
                 <div data-img="" class='quad' style="background-color: white;" data-kant-id="-1" onclick="setKant(this.getAttribute('data-img'), this.getAttribute('data-kant-id'))"></div>
                 {% for kant in Kants %}

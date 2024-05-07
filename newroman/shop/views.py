@@ -21,12 +21,47 @@ def make_order(request):
                     side = Side_Chain.Left
                     width = item.get('width')
                     height = item.get('lenght')
-                Rome_Blind.objects.create(Textile=textile, Kant=kant, width='width', height=height, side_chain=side, order=order)
-                cart.remove_all()
+                Rome_Blind.objects.create(Textile=textile, Kant=kant, width=width, height=height, side_chain=side, order=order)
+                
             except Exception:
-                redirect('construct')
-            redirect('construct')
-    return render(request, 'shop/Order.html')
+                return redirect('construct')
+        cart.remove_all()
+        return redirect('construct')
+    is_moderator = request.user.groups.filter(name='moderator').exists()
+    return render(request, 'shop/Order.html',{'is_moderator':is_moderator})
+
+def detail_order(request):
+    if request.user.groups.filter(name='moderator').exists():
+        is_moderator = request.user.groups.filter(name='moderator').exists()
+        id = request.GET.get('id')
+        if not str(id).isdigit():
+            return HttpResponse(f"Пользователь не найден {str(id)}", status=404)
+        order = Order.objects.get(id=int(id))
+        blinds = Rome_Blind.objects.all().filter(order=order)
+        print(blinds.all())
+        return render(request, 'shop/order_detail.html', {'blinds':blinds, 'is_moderator':is_moderator})
+    else:
+        return HttpResponse(status=404)
+
+def remove_order(request):
+    if request.user.groups.filter(name='moderator').exists():
+        id = request.GET.get('id')
+        if not str(id).isdigit():
+            
+            return HttpResponse(f"Пользователь не найден {str(id)}", status=404)
+        Order.objects.get(id=int(id)).delete()
+        return redirect('orders')
+    else:
+        return HttpResponse(status=404)
+
+def get_orders(request):
+    if request.user.groups.filter(name='moderator').exists():
+        is_moderator = request.user.groups.filter(name='moderator').exists()
+        orders = Order.objects.all().order_by('date')
+        print(orders)
+        return render(request, 'shop/orders_list.html', {'orders':orders, 'is_moderator':is_moderator})
+    else:
+        return HttpResponse(status=404 )
 
 def user_login(request):
     if request.POST:

@@ -24,8 +24,8 @@ class Kant(models.Model):
 
 class Order(models.Model):
     date = models.DateTimeField(auto_now_add=True)
-    adress = models.CharField(max_length=300)
-    number = models.CharField(max_length=20)
+    adress = models.CharField(max_length=300, null=False, default="")
+    number = models.CharField(max_length=20, null=False, default="")
 
 class Rome_Blind(models.Model):
     Textile = models.ForeignKey(Textile, on_delete=models.SET_NULL, null=True)
@@ -35,7 +35,7 @@ class Rome_Blind(models.Model):
     side_chain = models.CharField(max_length=10, choices=Side_Chain, default=Side_Chain.Left)
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
     def __str__(self):
-        return f'{Textile} {width} x {height}'
+        return f'{self.Textile} {self.width} x {self.height}'
 
 
     

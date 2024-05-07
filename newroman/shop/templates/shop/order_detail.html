@@ -9,22 +9,18 @@
             <th>Высота</th>
             <th>Ширина</th>
             <th>Сторона цепочки</th>
-            <th> </th>
         </tr>
     </thead>
     <tbody>
-    {% for item in cart %}
+    {% for item in blinds %}
         <tr>
-            <td>{{item.textileId}}</td>
-            <td>{{item.kantId}}</td>
-            <td>{{item.lenght}}</td>
+            <td>{{item.Textile.title}}</td>
+            <td>{{item.Kant.title}}</td>
+            <td>{{item.height}}</td>
             <td>{{item.width}}</td>
             <td>{{item.side_chain}}</td>
-            <td><a href="{% url 'remove'%}?id={{item.ind}}">Удалить</a></td>
         </tr>
     {% endfor %}
     </tbody>
 </table>
-<a href="{% url 'order'%}">Заказать</a>
-
 {% endblock content%}

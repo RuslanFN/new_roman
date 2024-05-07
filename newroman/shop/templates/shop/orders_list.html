@@ -1,0 +1,15 @@
+{% extends "shop/base.html" %}
+{% load static %}
+{% block styles %} <link href="{% static 'css/order.css' %}" type="text/css" rel="stylesheet"> {% endblock styles %}
+{% block title %}Список заказов{% endblock title %}
+{% block content %}
+{% for order in orders %}
+<div class="order-container">
+    <p><strong>Дата заказа:</strong> {{order.date}}</p>
+    <p><strong>Адрес доставки:</strong> {{order.adress}}</p>
+    <p><strong>Номер телефона:</strong> {{order.number}}</p>
+    <a class="btn" href="{% url 'orderdetail'%}?id={{order.id}}">Детали</a>
+    <a class="btn" href="{% url 'removeorder'%}?id={{order.id}}">Удалить</a >
+</div>
+{% endfor %}
+{% endblock content %}

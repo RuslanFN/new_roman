@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from shop.views import get_construct, user_login, user_logout, make_order
+from shop.views import get_construct, user_login, user_logout, make_order, get_orders, remove_order, detail_order
 from django.conf import settings
 from cart.views import cart_add, get_cart,remove
 from django.conf.urls.static import static
@@ -31,6 +31,10 @@ urlpatterns = [
     path('logout/', user_logout, name='logout'),
     path('order/', make_order, name='order'),
     path('remove/', remove, name='remove'),
+    path('orders/', get_orders, name='orders'),
+    path('removeorder/', remove_order, name='removeorder'),
+    path('orderdetail/', detail_order, name='orderdetail'),
+
 ]
 
 if settings.DEBUG: # new
