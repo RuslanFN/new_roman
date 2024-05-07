@@ -1,0 +1,94 @@
+
+@charset "UTF-8";
+
+.container {
+    position: relative;
+    height: 760px;
+  }
+  
+ .image {
+    width: 300px;
+    height: 200px;
+  }
+  
+ .image1 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+  }
+  
+ .image2 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+  }
+  .image21 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 3;
+  }
+.image3 {
+  width: 100px;
+  height: 100px;
+  border: 10px solid cornflowerblue;
+  position: relative;
+}
+.textiles {
+  width: auto;
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 110px);
+  grid-template-rows: min-content;
+  grid-gap: 10px;
+}
+.container-construct{
+  display: grid;
+  grid-template-columns: 620px 600px;
+  grid-gap: 50px;
+
+}
+.container-heght-width{
+  display: flex;
+  flex-direction: column;
+
+}
+#height{
+  width:450px;
+  border: 3px solid black;
+}
+#width{
+  width: 450px;
+  border: 3px solid black;
+}
+.container-heght-width label{
+  font-size:25pt;
+}
+.horizont-line{
+  border-bottom: 3px solid black;
+  padding: 0px;
+}
+.container-heght{
+  border: 3px solid black;
+  margin-bottom: 5px;
+}
+.container-width{
+  border: 3px solid black;
+}
+.textiles-group label{
+  font-size: 30pt;
+}
+.quad{
+  width: 100px;
+  height: 100px;
+  border: 10px solid gray;
+}
+.container-select-side-chain{
+  border: 3px solid black;
+  margin-bottom: 5px;
+}
+.submit-button{
+  font-size: 40px;
+}

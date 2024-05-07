@@ -1,0 +1,29 @@
+{% extends "shop\base.html" %}
+{% block title %} Корзина {% endblock title %}
+{% block content %} 
+<table class="cart">
+    <thead>
+        <tr>
+            <th>Ткань</th>
+            <th>Кант</th>
+            <th>Высота</th>
+            <th>Ширина</th>
+            <th>Сторона цепочки</th>
+            <th> </th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for item in cart %}
+        <tr>
+            <td>{{item.textileId}}</td>
+            <td>{{item.kantId}}</td>
+            <td>{{item.lenght}}</td>
+            <td>{{item.width}}</td>
+            <td>{{item.side_chain}}</td>
+            <td><a href="{% url 'remove'%}?id={{item.ind}}">Удалить</a></td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+{% endblock content%}

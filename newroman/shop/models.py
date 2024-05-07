@@ -1,18 +1,48 @@
 from django.db import models
+from enum import Enum
+from datetime import datetime
+
+class Side_Chain(models.TextChoices):
+    Left = "Слева"
+    Right = "Справа"
 
 class Textile(models.Model):
     title = models.CharField(max_length=250)
     fabric_type = models.CharField(max_length=250)
-    image = models.ImageField()
+    image_textile = models.ImageField(upload_to=f'images/%Y/%m/%d/')
+    image_blind = models.ImageField(upload_to=f'images/%Y/%m/%d/')
     def __str__(self):
-        return title
+        return self.title
+
+class Kant(models.Model):
+    title = models.CharField(max_length=250)
+    fabric_type = models.CharField(max_length=250)
+    image_textile = models.ImageField(upload_to=f'images/%Y/%m/%d/')
+    image_blind = models.ImageField(upload_to=f'images/%Y/%m/%d/')
+    def __str__(self):
+        return self.title
 
 class Order(models.Model):
-    Textile = models.ForeignKey(Textile, on_delete=models.CASCADE)
+    date = models.DateTimeField(auto_now_add=True)
+    adress = models.CharField(max_length=300)
+    number = models.CharField(max_length=20)
+
+class Rome_Blind(models.Model):
+    Textile = models.ForeignKey(Textile, on_delete=models.SET_NULL, null=True)
+    Kant = models.ForeignKey(Kant, on_delete=models.SET_NULL, null=True)
     width = models.IntegerField() 
     height = models.IntegerField()
+    side_chain = models.CharField(max_length=10, choices=Side_Chain, default=Side_Chain.Left)
+    order = models.ForeignKey(Order, on_delete=models.CASCADE)
     def __str__(self):
         return f'{Textile} {width} x {height}'
+
+
+    
+
+
+
+
     
 
 

@@ -1,0 +1,64 @@
+{% extends "shop/base.html" %}
+{% load static %}
+{% block styles %} <link href="{% static "css/style.css" %}" type="text/css" rel="stylesheet"> {% endblock styles %}
+{% block scripts %} <script src="{% static "js/script.js" %}"></script> {% endblock scripts %}
+{% block title %}Конструктор{% endblock title %}
+{% block content %}
+<form method="post" action="add">
+    {% csrf_token %}
+    <div class="container-construct">
+        <div class="container"> 
+            <img id="background" class="image1" src="https://shadesncurtains.com/vendor/img/ms.jpg"/>
+            <img id="blind" class="image2" src="https://shadesncurtains.com/img/clothes/85/840713912871185.png"/>
+            <img id="kant" class="image21" src=""/>
+        </div>
+        <div class='textiles-group'>
+            <label>Ткани</label>
+            <div class='textiles'>
+                {% for textile in textiles %}
+                    <img class="image3" src="{{textile.image_textile.url}}" onclick="setBlind('{{textile.image_blind.url}}', {{textile.id}})" />
+                {% endfor %}
+               
+            </div>
+            <label for"textiles">Канты</label>
+            <div class='textiles'>
+                <div data-img="" class='quad' style="background-color: white;" data-kant-id="-1" onclick="setKant(this.getAttribute('data-img'), this.getAttribute('data-kant-id'))"></div>
+                {% for kant in Kants %}
+                <div class='quad'  onclick="setKant('{{kant.image_blind.url}}', {{kant.id}})"><img style="width: 100px;height: 100px;" src="{{kant.image_textile.url}}"></div>
+                {% endfor %}
+            </div>
+        </div>
+        
+        <div class="container-heght-width">
+            <div class="container-heght">
+                <label id="height-label">Высота: 140</label>
+                <div class="range-to-height">
+                    <label for "height"> 80 </label>
+                    <input type="range" id="height" name="height" min="80", max="200" oninput="updateLabelHeight(this.value)" required/>
+                    <label for "height"> 200 </label>
+                </div>
+            </div>
+            <div class="container-width">
+                <label id="width-label">Ширина: 140</label>
+                <div>
+                    <label for "width"> 80 </label>
+                    <input type="range" id="width" name="width" min="80", max="200" oninput="updateLabelWidth(this.value)" required/>
+                    <label for "width"> 200 </label>
+                </div>
+            </div>
+            <div class="container-select-side-chain">
+                <label class="label-select-chain">Выбор стороны цепочки</label>
+                <div class="radio-select-chain">
+                    <input type="radio" id="Left" value="Left" name="side-chain" checked/>
+                    <label for="Left">Левая</label>
+                    <input type="radio" id="Right" value="Right" name="side-chain"/>
+                    <label for="Right">Правая</label>
+                </div>
+                <input type="hidden" name="textile-id" id="textile-id"/>
+                <input type="hidden" name="kant-id" id="kant-id"/>
+            </div>
+            <input class="submit-button" type="submit" value="В корзину">
+        </div>
+    </div>
+</form>
+{% endblock content %}

@@ -1,0 +1,19 @@
+{% extends "shop/base.html" %}
+{% load static %}
+{% block styles %} <link href="{% static "css/login.css" %}" type="text/css" rel="stylesheet"> {% endblock styles %}
+{% block title %}Логин{% endblock title %}
+{% block content %}
+<form method="post" action="{% url 'order' %}">
+    {% csrf_token %}
+    <div class="form_auth_block">
+        <div class="form_auth_block_content">
+            <p class="form_auth_block_head_text">Заказ</p>
+            <label>Введите Ваш адресс</label>
+            <input type="adress" name="adress" placeholder="Введите Ваш адресс" required >
+            <label>Введите Ваш номер телефона</label>
+            <input type="tel" name="tel" pattern="+7[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="Введите Ваш номер телефона" required >
+            <button class="form_auth_button" type="submit" name="form_auth_submit">Отправить</button>
+        </div>
+    </div>
+</form>
+{% endblock content %}

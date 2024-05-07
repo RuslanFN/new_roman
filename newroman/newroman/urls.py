@@ -16,7 +16,22 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from shop.views import get_construct, user_login, user_logout, make_order
+from django.conf import settings
+from cart.views import cart_add, get_cart,remove
+from django.conf.urls.static import static
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('construct/', get_construct, name='construct'),
+    path('construct/add', cart_add),
+    path('cart', get_cart, name='cart'),
+    path('login/', user_login, name='login'),
+    path('logout/', user_logout, name='logout'),
+    path('order/', make_order, name='order'),
+    path('remove/', remove, name='remove'),
 ]
+
+if settings.DEBUG: # new
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
