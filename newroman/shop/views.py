@@ -85,4 +85,5 @@ def get_construct(request):
     is_moderator = request.user.groups.filter(name='moderator').exists()
     textile = Textile.objects.all()
     kants = Kant.objects.all()
+    print(is_moderator)
     return render(request, "shop/construct.html", {'textiles': textile, 'Kants':kants, 'is_moderator': is_moderator})

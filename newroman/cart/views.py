@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from cart.cart import Cart
+from shop.models import Textile, Kant
 from django.views.decorators.http import require_GET, require_POST
 from shop.views import get_construct
 @require_POST
@@ -20,8 +21,14 @@ def cart_add(request):
 def get_cart(request):
     cart = Cart(request)
     print(cart.cart)
+    cart_copy = cart.cart.copy()
+    for item in cart_copy:
+       title_textile = Textile.objects.all().get(id=int(item.get('textileId'))).title
+       title_kant = Kant.objects.all().get(id=int(item.get('kantId'))).title
+       item['textileId'] = title_textile
+       item['kantId'] = title_kant
     is_moderator = request.user.groups.filter(name='moderator').exists()
-    return render(request, "cart.html", {"cart": cart, 'is_moderator': is_moderator})
+    return render(request, "cart.html", {"cart": cart_copy, 'is_moderator': is_moderator})
 def remove(request):
     cart = Cart(request)
     if str(request.GET.get('id')).isdigit():
