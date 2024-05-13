@@ -24,7 +24,9 @@
             <div class='textiles'>
                 <div data-img="" class='quad' style="background-color: white;" data-kant-id="-1" onclick="setKant(this.getAttribute('data-img'), this.getAttribute('data-kant-id'))"></div>
                 {% for kant in Kants %}
+                {%if kant.title != "Нет"%}
                 <div class='quad'  onclick="setKant('{{kant.image_blind.url}}', {{kant.id}})"><img style="width: 100px;height: 100px;" src="{{kant.image_textile.url}}"></div>
+                {%endif%}
                 {% endfor %}
             </div>
         </div>

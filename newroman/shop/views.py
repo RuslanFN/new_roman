@@ -13,7 +13,10 @@ def make_order(request):
         for item in cart:
             try:
                 textile = Textile.objects.get(id=item.get('textileId'))
-                kant = Kant.objects.get(id=item.get('kantId'))
+                if Kant.objects.filter(id=item.get('kantId')).exists():
+                    kant = Kant.objects.get(id=item.get('kantId'))
+                else:
+                    kant=Kant.objects.get(title="Нет")
                 side = item.get('side_chain')
                 if side == 'Right':
                     side = Side_Chain.Right

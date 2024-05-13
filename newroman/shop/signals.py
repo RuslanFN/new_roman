@@ -27,7 +27,7 @@ def create_group_on_startup(sender, **kwargs):
 
 @receiver(post_migrate)
 def create_modelobjects(sender, **kwargs):
-    if not Textile.objects.filter(title="Ткань1"):
+    if not Textile.objects.filter(title="Ткань1").exists():
         image1 = BytesIO()
         Image.open('newroman/on_startup_media/Ткань1-мини.jpg').save(image1, format='JPEG')
         image2 = BytesIO()
@@ -35,7 +35,7 @@ def create_modelobjects(sender, **kwargs):
         Textile.objects.create(title='Ткань1', fabric_type='Хлопок', 
             image_textile=ContentFile(image1.getvalue(), name='Ткань1-мини.jpg'), 
             image_blind=ContentFile(image2.getvalue(), name='Ткань1.png'))
-    if not Textile.objects.filter(title="Ткань2"):
+    if not Textile.objects.filter(title="Ткань2").exists():
         image1 = BytesIO()
         Image.open('newroman/on_startup_media/Ткань2-мини.jpg').save(image1, format='JPEG')
         image2 = BytesIO()
@@ -43,15 +43,17 @@ def create_modelobjects(sender, **kwargs):
         Textile.objects.create(title='Ткань2', fabric_type='Хлопок',
             image_textile=ContentFile(image1.getvalue(), name='Ткань2-мини.jpg'), 
             image_blind=ContentFile(image2.getvalue(), name='Ткань2.png'))
-    if not Kant.objects.filter(title='Кант1'):
+    if not Kant.objects.filter(title='Кант1').exists():
         image1 = BytesIO()
         Image.open('newroman/on_startup_media/Кант.png').save(image1, format='PNG')
         Kant.objects.create(title='Кант1', fabric_type='Бархат',
             image_textile=ContentFile(image1.getvalue(), name='Кант.png'), 
             image_blind=ContentFile(image1.getvalue(), name='Кант.png'))
-    if not Kant.objects.filter(title='Кант2'):
+    if not Kant.objects.filter(title='Кант2').exists():
         image1 = BytesIO()
         Image.open('newroman/on_startup_media/Кант2.png').save(image1, format='PNG')
         Kant.objects.create(title='Кант2', fabric_type='Бархат', 
             image_textile=ContentFile(image1.getvalue(), name='Кант2.png'), 
             image_blind=ContentFile(image1.getvalue(), name='Кант2.png'))
+    if not Kant.objects.filter(title="Нет").exists():
+        Kant.objects.create(title="Нет")

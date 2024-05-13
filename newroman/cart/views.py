@@ -23,10 +23,13 @@ def get_cart(request):
     print(cart.cart)
     cart_copy = cart.cart.copy()
     for item in cart_copy:
-       title_textile = Textile.objects.all().get(id=int(item.get('textileId'))).title
-       title_kant = Kant.objects.all().get(id=int(item.get('kantId'))).title
-       item['textileId'] = title_textile
-       item['kantId'] = title_kant
+        title_textile = Textile.objects.all().get(id=int(item.get('textileId'))).title
+        if Kant.objects.filter(id=int(item.get('kantId'))).exists():
+            title_kant = Kant.objects.all().get(id=int(item.get('kantId'))).title
+        else: 
+            title_kant = 'Нет'
+        item['textileId'] = title_textile
+        item['kantId'] = title_kant
     is_moderator = request.user.groups.filter(name='moderator').exists()
     return render(request, "cart.html", {"cart": cart_copy, 'is_moderator': is_moderator})
 def remove(request):
