@@ -27,6 +27,7 @@ urlpatterns = [
      path('', get_construct),
     path('construct/', get_construct, name='construct'),
     path('construct/add', cart_add),
+    path('add', cart_add),
     path('cart', get_cart, name='cart'),
     path('login/', user_login, name='login'),
     path('logout/', user_logout, name='logout'),

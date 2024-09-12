@@ -3,8 +3,8 @@ from enum import Enum
 from datetime import datetime
 
 class Side_Chain(models.TextChoices):
-    Left = "Слева"
-    Right = "Справа"
+    Left = '1', "Слева"
+    Right = '2', "Справа"
 
 class Textile(models.Model):
     title = models.CharField(max_length=250)
@@ -32,7 +32,7 @@ class Rome_Blind(models.Model):
     Kant = models.ForeignKey(Kant, on_delete=models.SET_NULL, null=True)
     width = models.IntegerField() 
     height = models.IntegerField()
-    side_chain = models.CharField(max_length=10, choices=Side_Chain, default=Side_Chain.Left)
+    side_chain = models.CharField(max_length=10, choices=Side_Chain.choices, default=Side_Chain.Left)
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
     def __str__(self):
         return f'{self.Textile} {self.width} x {self.height}'
