@@ -17,8 +17,8 @@ class Textile(models.Model):
 class Kant(models.Model):
     title = models.CharField(max_length=250)
     fabric_type = models.CharField(max_length=250)
-    image_textile = models.ImageField(upload_to=f'images/%Y/%m/%d/')
-    image_blind = models.ImageField(upload_to=f'images/%Y/%m/%d/')
+    image_textile = models.ImageField(upload_to='images/%Y/%m/%d/')
+    image_blind = models.ImageField(upload_to='images/%Y/%m/%d/')
     def __str__(self):
         return self.title
 
